@@ -8,12 +8,12 @@ git = Git()
 
 
 def _read_file(path):
-    with open(path, 'r') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         return f.read()
 
 
 def _write_file(path, text):
-    with open(path, 'r+') as f:
+    with open(path, 'w', encoding='utf-8') as f:
         f.write(text)
 
 
@@ -29,7 +29,7 @@ def insert_branch(path, regex):
     content = _read_file(path)
 
     if not content.startswith(expected):
-        new_message = expected + " " + content
+        new_message = f"{expected} {content.lstrip()}"
         _write_file(path, new_message)
         print("Commit message altered:\n" + new_message)
 
